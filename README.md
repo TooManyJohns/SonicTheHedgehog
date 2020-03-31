@@ -31,7 +31,7 @@ https://www.sfml-dev.org/download/sfml/2.5.1/
 Open the ZIP and inside should be a SFML-version#, **rename** the folder to just 'SFML'
 
 **3.) Create a folder in your directory**
-Name is External Depencies. **place SFML folder in here**
+Name it `External Libraries` **place SFML folder in here, this will come into play later**
 
 Should look like this in your overhead directory after doing this, inside :
 ![](https://i.imgur.com/oyM0D1t.png)
@@ -56,7 +56,7 @@ In "Additional Include Directories" copy and paste: $(SolutionDir)/../External L
 $(SolutionDir)/../External Libraries/SFML/include;%(AdditionalIncludeDirectories)
 
 -> Linker -> Input
-In "Additional Depencies" -> Edit & Copy and paste these:
+In "Additional Dependencies" -> Edit & Copy and paste these:
 
 `sfml-main-d.lib`
 
