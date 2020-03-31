@@ -76,10 +76,15 @@ $(SolutionDir)/../External Libraries/SFML/lib
 
 **5.) Run using Local Windows Debugger, and you too can play Sonic! ➡️**
 
-The controls are:
+The Controls are:
+
 A - > left
+
 D - > right
-SPACE - > Jump, you can kill enemies by being in ball form jumping and getting ontop of them.
+
+SPACE - > Jump
+
+You can kill enemies by being in ball form jumping and getting ontop of them.
 Run into rings to earn them, jump over obstacles and defeat enemies by jumping on them. Screenshots are in the Wiki page : https://github.com/TooManyJohns/SonicTheHedgehog/wiki
 There you can find out more technical aspects about how the game works, along with some pictures of gameplay and all involved assets.
 
