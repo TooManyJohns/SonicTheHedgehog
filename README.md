@@ -1,11 +1,11 @@
 # Sonic The Hedgehog, written in C++ 🦔💎
 Sonic the Hedgehog, made with C++ using SFML
 
-**Please note this was a tech-demo of how much I could do in a week's time for a final project for a programming course of mine, not a finished product. So please keep this in mind!**
-
-*If you are asked to "Attach something to the process" when starting the game cancel and re-run the game will run fine.*
+**Please note this was a tech-demo of how much I could do in a week's time for a final project for a programming course of mine in early 2019, not a COMPLETE Sonic game. So please keep this in mind!**
 
 🥚 (That means no eggman....yet!) 🥚
+
+*If you are asked to "Attach something to the process" when starting the game cancel and re-run the game will run fine.*
 
 I used Visual Studio 2015 for this project.
 
