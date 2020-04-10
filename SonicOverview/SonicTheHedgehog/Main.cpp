@@ -29,17 +29,16 @@ int main()
 
 	Clock clock;
 
-
-
-	RenderWindow window(VideoMode(CAMERA_HEIGHT, CAMERA_HEIGHT), "John and Connor's game: Sonic");
+	RenderWindow window(VideoMode(CAMERA_HEIGHT, CAMERA_HEIGHT), "John's game: Sonic", Style::Close | Style::Titlebar);
 	window.setFramerateLimit(60);
+	
 
 	//setting view
 	View view(Vector2f(0.0f, 0.0f), Vector2f(CAMERA_HEIGHT, CAMERA_HEIGHT));
 
 
 	Texture backgroundTexture;
-	backgroundTexture.loadFromFile("background.png");
+	backgroundTexture.loadFromFile("assets/background.png");
 	RectangleShape background(Vector2f(12288, 728));
 	background.setTexture(&backgroundTexture);
 	background.setOrigin(700, 0);
@@ -55,7 +54,7 @@ int main()
 
 
 	Texture playerTexture;
-	playerTexture.loadFromFile("sonicSprSheet.png");
+	playerTexture.loadFromFile("assets/sonicSprSheet.png");
 	Player player(&playerTexture, Vector2u(3, 3), 0.3f, 400.0f, 200.0f);
 	//^^Player(Texture* texture, Vector2u imageCount, float switchTime, float speed, float jumpHeight);
 	//ok so, the Vector 3,3 thing above shows that there are 3 sonics on the x axis and 3 on the y axis and splits them up equally, the 0.3f is about a frame per second at 60 fps
@@ -69,18 +68,18 @@ int main()
 
 	//set sonics UI to put it in the already made ground format, so we dont have a redudant amount of garbo classes of stuff that doesn't warrent it.
 	Texture sonicLivesUI;
-	sonicLivesUI.loadFromFile("sonicLiveCount.png");
+	sonicLivesUI.loadFromFile("assets/sonicLiveCount.png");
 	//gameover ui
 	Texture gameOverSpr;
-	gameOverSpr.loadFromFile("GameOverScreen.png");
+	gameOverSpr.loadFromFile("assets/GameOverScreen.png");
 	//gameover ui
 	Texture gameWonSpr;
-	gameWonSpr.loadFromFile("GameWinScreen.png");
+	gameWonSpr.loadFromFile("assets/GameWinScreen.png");
 	//set floor textures with the wall also since they both do the same thing!
 	Texture groundTexture;
-	groundTexture.loadFromFile("groundTile.png");
+	groundTexture.loadFromFile("assets/groundTile.png");
 	Texture wallTexture;
-	wallTexture.loadFromFile("WallSprite.png");
+	wallTexture.loadFromFile("assets/WallSprite.png");
 	//set Ground floor
 	vector<Ground> groundTiles;
 	groundTiles.push_back(Ground(&groundTexture, Vector2f(1024.0f, 84.0f), Vector2f(512.0f, 768.0f))); //ground
@@ -98,7 +97,7 @@ int main()
 
 	//Set enemies up TESTING!!!!!!!!!!!!!!!!
 	Texture enemyTexture;
-	enemyTexture.loadFromFile("enemySpr.png");
+	enemyTexture.loadFromFile("assets/enemySpr.png");
 	vector<Enemy*> enemyVector;
 	Enemy enemy1(Enemy(&enemyTexture, Vector2f(123.0f, 90.0f),Vector2u(3, 1), 0.3f, 40.0f));
 	Enemy enemy2(Enemy(&enemyTexture, Vector2f(123.0f, 90.0f),Vector2u(3, 1), 0.3f, 40.0f));
@@ -116,7 +115,7 @@ int main()
 
 	//set rings up in vector to prevent tedious code
 	Texture ringTexture;
-	ringTexture.loadFromFile("sprCoin.png");
+	ringTexture.loadFromFile("assets/sprCoin.png");
 
 
 
@@ -182,9 +181,8 @@ int main()
 	liveText.setPosition(-60.0f, 765.0f);
 
 
-	//do not touch, connor :o
 	float deltaTime = 0.0f;
-	//do not touch, connor :o
+
 
 	Vector2u EnemytextureSize = enemyTexture.getSize();
 	EnemytextureSize.x /= 3;
@@ -215,7 +213,7 @@ int main()
 			//if window closed below
 			if (event.type == Event::Closed)
 				window.close();
-			//if it's resized below
+			//if it's resized below, it will resize on aspect ratio rather than dragging out the picture
 			if (event.type == Event::Resized)
 				ResizeCamera(window, view);
 		}
