@@ -13,7 +13,7 @@
 using namespace std;
 using namespace sf;
 
-static const float CAMERA_HEIGHT = 600.0f;
+static const float CAMERA_HEIGHT = 1051.0f;
 
 void ResizeCamera(const RenderWindow& window, View& view)
 {
@@ -29,12 +29,12 @@ int main()
 
 	Clock clock;
 
-	RenderWindow window(VideoMode(CAMERA_HEIGHT, CAMERA_HEIGHT), "John's game: Sonic", Style::Close | Style::Titlebar);
+	RenderWindow window(VideoMode(960, 672), "Sonic The Hedgehog in C++, By John Lutz", Style::Close | Style::Titlebar | Style::Fullscreen);
 	window.setFramerateLimit(60);
 	
 
-	//setting view
-	View view(Vector2f(0.0f, 0.0f), Vector2f(CAMERA_HEIGHT, CAMERA_HEIGHT));
+	// View ( CAMERA FOCUS x,y ) and CAMERA ZOOM, bigger the number the farther out
+	View view(Vector2f(0.0f, 0.0f), Vector2f(CAMERA_HEIGHT, CAMERA_HEIGHT*0.7));
 
 
 	Texture backgroundTexture;
@@ -42,6 +42,14 @@ int main()
 	RectangleShape background(Vector2f(12288, 728));
 	background.setTexture(&backgroundTexture);
 	background.setOrigin(700, 0);
+
+	//Load and set icon for the game
+	Image icon;
+	icon.loadFromFile("assets/sonicIcon.png"); 
+	Vector2u iconSize = icon.getSize();
+	window.setIcon(iconSize.x, iconSize.y, icon.getPixelsPtr());
+
+
 
 	Font hud;
 
