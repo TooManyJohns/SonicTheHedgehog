@@ -15,7 +15,8 @@ public:
 	void Draw(RenderWindow& window);
 	void OnCollision(Vector2f direction);
 
-	bool canJump;//removed from private, if jump glitches may wanna return it..?
+	bool isIdle = true; //he initially isn't moving and can run the animation of an idle position 
+	bool canJump; //removed from private, if jump glitches may wanna return it..?
 	int gameOver = 0;
 
 	//getter for player position for camera positioning!

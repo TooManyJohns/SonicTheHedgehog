@@ -8,8 +8,6 @@
 #include "Enemy.h"
 #pragma comment(lib, "winmm.lib") //MAKES IT SO SOUND CAN PLAY!
 
-
-
 using namespace std;
 using namespace sf;
 
@@ -21,21 +19,17 @@ void ResizeCamera(const RenderWindow& window, View& view)
 
 	//set size
 	view.setSize(CAMERA_HEIGHT * aspectRatio, CAMERA_HEIGHT);
-
 }
 
 int main()
 {
-
 	Clock clock;
 
-	RenderWindow window(VideoMode(960, 672), "Sonic The Hedgehog in C++, By John Lutz", Style::Close | Style::Titlebar | Style::Fullscreen);
+	RenderWindow window(VideoMode(960, 672), "Sonic The Hedgehog in C++, By John Lutz", Style::Close | Style::Titlebar);
 	window.setFramerateLimit(60);
-	
 
 	// View ( CAMERA FOCUS x,y ) and CAMERA ZOOM, bigger the number the farther out
 	View view(Vector2f(0.0f, 0.0f), Vector2f(CAMERA_HEIGHT, CAMERA_HEIGHT*0.7));
-
 
 	Texture backgroundTexture;
 	backgroundTexture.loadFromFile("assets/background.png");
@@ -48,18 +42,13 @@ int main()
 	icon.loadFromFile("assets/sonicIcon.png"); 
 	Vector2u iconSize = icon.getSize();
 	window.setIcon(iconSize.x, iconSize.y, icon.getPixelsPtr());
-
-
-
 	Font hud;
-
 
 	if (!hud.loadFromFile("hud-font.ttf"))
 	{
 		std::cout << "Error loading file" << std::endl;
 		system("pause");
 	}
-
 
 	Texture playerTexture;
 	playerTexture.loadFromFile("assets/sonicSprSheet.png");
@@ -68,11 +57,7 @@ int main()
 	//ok so, the Vector 3,3 thing above shows that there are 3 sonics on the x axis and 3 on the y axis and splits them up equally, the 0.3f is about a frame per second at 60 fps
 	// speed is the second to last variable if it does need changing/testing of use
 	//sound that doesn't allow any other music to be played over it, so don't bother.
-
 	//PlaySound("GreenHillZoneMUSIC.wav", NULL, SND_FILENAME | SND_ASYNC);
-
-	
-
 
 	//set sonics UI to put it in the already made ground format, so we dont have a redudant amount of garbo classes of stuff that doesn't warrent it.
 	Texture sonicLivesUI;
@@ -115,17 +100,11 @@ int main()
 	
 	enemyVector.push_back(&enemy1);
 	enemyVector.push_back(&enemy2);
-
 	// END TEST!!!!!!!!!!!!
-
-
-
 
 	//set rings up in vector to prevent tedious code
 	Texture ringTexture;
 	ringTexture.loadFromFile("assets/sprCoin.png");
-
-
 
 	vector<Coin*> ringsVector;
 	Coin coin1(Coin(&ringTexture, Vector2f(50.0f, 50.0f)));
@@ -177,7 +156,6 @@ int main()
 	scoreBoard.setFont(hud);
 	scoreBoard.setFillColor(Color::Yellow);
 	scoreBoard.setPosition(-125.0f, 700.0f);
-
 	//amount of lives (just the number, not the pretty looking icon and stuff)
 	int lives = 3;
 	Text liveText;
@@ -188,21 +166,15 @@ int main()
 	liveText.setString(ssLives.str());
 	liveText.setPosition(-60.0f, 765.0f);
 
-
 	float deltaTime = 0.0f;
-
 
 	Vector2u EnemytextureSize = enemyTexture.getSize();
 	EnemytextureSize.x /= 3;
 	EnemytextureSize.y /= 4;
 	
-
-
 	Vector2u textureSize = playerTexture.getSize();
 	textureSize.x /= 3;
 	textureSize.y /= 4;
-
-
 
 	while (window.isOpen())
 	{
@@ -213,9 +185,6 @@ int main()
 			deltaTime = 1.0f / 20.0f; //if you run at 10 fps it'll go at 20fps
 		//this is to stop glitching of a movement bug when you fling the window around
 
-	
-
-
 		while (window.pollEvent(event))
 		{
 			//if window closed below
@@ -225,23 +194,10 @@ int main()
 			if (event.type == Event::Resized)
 				ResizeCamera(window, view);
 		}
-
-
-
-
-
-
 		player.Update(deltaTime);
-
-
-
-
 		enemy1.Update(deltaTime);
 		enemy2.Update(deltaTime);
 		Vector2f direction; //direction into player on collision func
-
-	
-
 
 		for (Ground& ground : groundTiles)
 			if (ground.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
@@ -309,11 +265,9 @@ int main()
 			ringsAmount.setString(ssRing.str());
 		}
 
-
-
-
 		for (Enemy* enemies : enemyVector)
 		{
+
 			//very similar to the coin section, exception being these ARE enemies, so you should be in jumping motion to kill this SPECIFIC one (based off the original game, that is!)
 			if (enemy1.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f) )
 			{
@@ -329,7 +283,6 @@ int main()
 					lives = lives - 1;
 				}
 			}
-
 
 			if (enemy2.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
 			{
@@ -356,14 +309,10 @@ int main()
 			liveText.setString(ssLives.str());
 		}
 
-
-
-
 		//time increment IMPLEMENTATION BELOW, NO TOUCH
 		if (increSecs <= 60)
 		{
-			increSecs++;
-			
+			increSecs++;	
 		}
 		if (increSecs == 60) {
 			secs = secs + 1;
@@ -379,15 +328,12 @@ int main()
 		//NO TOUCH ABOVE
 
 		//make gameover screen
-
-		
 		if (RingCount == 8)
 		{
 			player.setPos({ -1000, -3820 });
 
 		}
 	
-
 		std::ostringstream ssTime;
 		ssTime << "TIME: " << timer;
 		Text time;
@@ -406,16 +352,11 @@ int main()
 		// ^^this flips whether he is facing right/left 
 		window.clear();
 		
-
-
-	//set view with window
+		//set view with window
 		window.setView(view);
-
 
 		//must be after player updates (player.Update(deltaTime);
 		view.setCenter(player.GetterPos());
-
-		
 
 		window.draw(background);
 		for (Enemy* enemies : enemyVector)

@@ -12,7 +12,6 @@ animation(texture, imageCount, switchTime)
 	body.setPosition(50.0f, 600.0f); //where player is initially! (sonic in this case)
 	body.setTexture(texture);
 	body.setOrigin(body.getSize() / 2.0f);
-	
 }
 
 
@@ -23,7 +22,6 @@ Player::~Player()
 
 void Player::Update(float deltaTime)
 {
-
 	velocity.x  *= 0.00f; //slowly stop moving higher is slower time to stop (aka sonics physics engine kinda)
 	if (Keyboard::isKeyPressed(Keyboard::A)) //if a is pressed go left
 		velocity.x -= speed; // moves according to time
@@ -39,9 +37,6 @@ void Player::Update(float deltaTime)
 		velocity.y = -sqrtf(2.0f * 981.0f * jumpHeight); //9.81 grav *** -> set 100 sfml units = a meter here
 		// the - infront of sqrtrf makes it so you jump up not down
 	}
-
-
-	
 
 	velocity.y += 981.0f *deltaTime;
 
@@ -67,7 +62,6 @@ void Player::Update(float deltaTime)
 	{
 		row = 2;
 	}
-
 
 	//updates animation to whatever is set
 	animation.Update(row, deltaTime, faceRight);
