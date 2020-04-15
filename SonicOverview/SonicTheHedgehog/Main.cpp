@@ -198,12 +198,12 @@ int main()
 		Vector2f direction; //direction into player on collision func
 
 		for (Ground& ground : groundTiles)
+		{
 			if (ground.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
 			{
 				player.OnCollision(direction);
-				enemy1.OnCollision(direction);
-				enemy2.OnCollision(direction);
 			}
+		}
 		//make sure floor is after player update or it will give game JITTERS (FRIZZY)
 		
 		//gonna detect collisions for each coin (must do with each addition)
@@ -225,6 +225,15 @@ int main()
 		{
 			//update enemies once per frame
 			enemies->Update(deltaTime);
+
+			for (Ground& ground : groundTiles)
+			{
+				if (ground.GetCollider().CheckCollision(enemies->GetCollider(), direction, 1.0f))
+				{
+					enemies->OnCollision(direction);
+				}
+			}
+
 			//very similar to the coin section, exception being these ARE enemies, so you should be in jumping motion to kill this SPECIFIC one (based off the original game, that is!)
 			if (enemies->GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f) )
 			{

@@ -25,34 +25,25 @@ void Enemy::Draw(RenderWindow & window)
 }
 
 
-
-
 void Enemy::Update(float deltaTime)
 {
-
-	velocity.y += 0;
-	if (velocity.x == 0.0f)
+	velocity.x = speed; //slowly stop moving higher is slower time to stop (aka sonics physics engine kinda)
+	velocity.y += 981.0f *deltaTime;
+	if (velocity.x >= 0.0f)
 	{
-		row = 0; //doing idle animation
+		faceRight = true; // if he is facing right, face right
+		row = 0;
 	}
-	else
-	{
-		row = 0; //movement animation
-
-		if (velocity.x > 0.0f)
-		{
-			faceRight = true; // if he is facing right, face right
-		}
-		else {
-			faceRight = false; //if he is NOT facing right, face left
-		}
-
-
-		//updates animation to whatever is set
-		animation.Update(row, deltaTime, faceRight);
-		body.setTextureRect(animation.uvRect);
-		body.move(velocity * deltaTime); //not frame specific 
+	else {
+		faceRight = false; //if he is NOT facing right, face left
+		row = 0;
 	}
+
+	//updates animation to whatever is set
+	animation.Update(row, deltaTime, faceRight);
+	body.setTextureRect(animation.uvRect);
+	body.move(velocity * deltaTime); //not frame specific 
+	
 }
 
 
@@ -61,15 +52,12 @@ void Enemy::OnCollision(Vector2f direction)
 	if (direction.x < 0.0f)
 	{
 		//collision of left
-		velocity.x = 0;
-		velocity.x -= speed; // moves according to time
+		speed = speed*-1; // moves according to time
 	}
 	else if (direction.x > 0.0f)
 	{
 		//collision of right
-		velocity.x = 0;
-		velocity.x += speed;
-
+		speed = speed*-1;
 	}
 	if (direction.y < 0.0f)
 	{
