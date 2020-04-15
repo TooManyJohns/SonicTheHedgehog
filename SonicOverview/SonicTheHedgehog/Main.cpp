@@ -195,8 +195,6 @@ int main()
 				ResizeCamera(window, view);
 		}
 		player.Update(deltaTime);
-		enemy1.Update(deltaTime);
-		enemy2.Update(deltaTime);
 		Vector2f direction; //direction into player on collision func
 
 		for (Ground& ground : groundTiles)
@@ -211,53 +209,11 @@ int main()
 		//gonna detect collisions for each coin (must do with each addition)
 		for (Coin* rings : ringsVector)
 		{
-			if (coin1.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
+			if (rings->GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
 			{
 				player.OnCollision(direction);
 				RingCount = RingCount + 1;
-				coin1.setPos({ 1000, 4002 }); //throws coin away
-			}
-			if (coin2.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
-			{
-				player.OnCollision(direction);
-				RingCount = RingCount + 1;
-				coin2.setPos({ 1000, 4002 }); //throws coin away
-			}
-			if (coin3.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
-			{
-				player.OnCollision(direction);
-				RingCount = RingCount + 1;
-				coin3.setPos({ 1000, 4002 }); //throws coin away
-			}
-			if (coin4.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
-			{
-				player.OnCollision(direction);
-				RingCount = RingCount + 1;
-				coin4.setPos({ 1000, 4002 }); //throws coin away
-			}
-			if (coin5.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
-			{
-				player.OnCollision(direction);
-				RingCount = RingCount + 1;
-				coin5.setPos({ 1000, 4002 }); //throws coin away
-			}
-			if (coin6.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
-			{
-				player.OnCollision(direction);
-				RingCount = RingCount + 1;
-				coin6.setPos({ 1000, 4002 }); //throws coin away
-			}
-			if (coin7.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
-			{
-				player.OnCollision(direction);
-				RingCount = RingCount + 1;
-				coin7.setPos({ 1000, 4002 }); //throws coin away
-			}
-			if (coin8.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
-			{
-				player.OnCollision(direction);
-				RingCount = RingCount + 1;
-				coin8.setPos({ 1000, 4002 }); //throws coin away
+				rings->setPos({ 1000, 4002 }); //throws coin away
 			}
 			//updates coin count baby
 			ssRing.str("");
@@ -267,29 +223,15 @@ int main()
 
 		for (Enemy* enemies : enemyVector)
 		{
-
+			//update enemies once per frame
+			enemies->Update(deltaTime);
 			//very similar to the coin section, exception being these ARE enemies, so you should be in jumping motion to kill this SPECIFIC one (based off the original game, that is!)
-			if (enemy1.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f) )
+			if (enemies->GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f) )
 			{
 				if (player.canJump == false) {
 					player.OnCollision(direction);
 					score = score + 100;
-					enemy1.setPos({ 1000, 4002 }); //throws enemy away
-				}
-				else {
-					player.OnCollision(direction);
-					score = 0;
-					player.setPos({ 0, 685 });
-					lives = lives - 1;
-				}
-			}
-
-			if (enemy2.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
-			{
-				if (player.canJump == false) {
-					player.OnCollision(direction);
-					score = score + 100;
-					enemy2.setPos({ 1000, 4002 }); //throws enemy away
+					enemies->setPos({ 1000, 4002 }); //throws enemy away
 				}
 				else {
 					player.OnCollision(direction);
@@ -349,30 +291,26 @@ int main()
 		}
 		//GAMEOVER ABOVE
 
-		// ^^this flips whether he is facing right/left 
 		window.clear();
 		
 		//set view with window
 		window.setView(view);
 
-		//must be after player updates (player.Update(deltaTime);
+		//must be after player updates ex: OBJECT_NAME.Update(deltaTime);
 		view.setCenter(player.GetterPos());
-
 		window.draw(background);
 		for (Enemy* enemies : enemyVector)
-			enemy1.Draw(window);
-			enemy2.Draw(window);
+		{
+			enemies->Draw(window);
+		}
 		for (Coin* rings : ringsVector)
-			coin1.Draw(window);
-			coin2.Draw(window);
-			coin3.Draw(window);
-			coin4.Draw(window);
-			coin5.Draw(window);
-			coin6.Draw(window);
-			coin7.Draw(window);
-			coin8.Draw(window);
+		{
+			rings->Draw(window);
+		}
 		for (Ground& ground : groundTiles)
+		{
 			ground.Draw(window);
+		}
 		player.Draw(window);
 		window.draw(scoreBoard);
 		window.draw(time);
