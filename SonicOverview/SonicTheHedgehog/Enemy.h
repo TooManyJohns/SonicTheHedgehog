@@ -1,21 +1,23 @@
 #pragma once
 #include "GameManager.h"
+
 #include "Collision.h"
+
 #include <SFML\Graphics.hpp>
+
 #include "Animation.h"
+
 using namespace sf;
 
-
-
-class Enemy
-{
+class Enemy {
 public:
 	Enemy(Texture* texture, Vector2f size, Vector2u imageCount, float switchTime, float speed);
 	~Enemy();
 	void Update(float deltaTime);
-	void Draw(RenderWindow& window);
-	Collision GetCollider() { return Collision(body); }
-
+	void Draw(RenderWindow & window);
+	Collision GetCollider() {
+		return Collision(body);
+	}
 
 	void OnCollision(Vector2f direction);
 	FloatRect getGlobalBounds() {
@@ -24,7 +26,9 @@ public:
 	void setPos(sf::Vector2f newPos) {
 		body.setPosition(newPos);
 	}
-	Vector2f GetterPos() { return body.getPosition(); }
+	Vector2f GetterPos() {
+		return body.getPosition();
+	}
 private:
 	RectangleShape body;
 	Animation animation;
@@ -35,4 +39,3 @@ private:
 	Vector2f velocity;
 
 };
-

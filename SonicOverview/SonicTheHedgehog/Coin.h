@@ -1,16 +1,20 @@
 #pragma once
 #include "GameManager.h"
+
 #include "Collision.h"
+
 #include <SFML\Graphics.hpp>
+
 using namespace sf;
 
-class Coin
-{
+class Coin {
 public:
 	Coin(Texture* texture, Vector2f size);
 	~Coin();
 	void Draw(RenderWindow& window);
-	Collision GetCollider() { return Collision(body); }
+	Collision GetCollider() {
+		return Collision(body);
+	}
 	FloatRect getGlobalBounds() {
 		return body.getGlobalBounds(); //gets bounds for detection inside Player.h
 	}
@@ -18,10 +22,7 @@ public:
 		body.setPosition(newPos);
 	}
 
-
-
 private:
 	RectangleShape body;
 
 };
-

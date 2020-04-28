@@ -1,11 +1,17 @@
-
 #include "GameManager.h"
+
 #include "Player.h"
+
 #include <string>
+
 #include "Ground.h"
+
 #include <vector>
+
 #include "Coin.h"
+
 #include "Enemy.h"
+
 #pragma comment(lib, "winmm.lib") //MAKES IT SO SOUND CAN PLAY!
 
 using namespace std;
@@ -13,23 +19,21 @@ using namespace sf;
 
 static const float CAMERA_HEIGHT = 1051.0f;
 
-void ResizeCamera(const RenderWindow& window, View& view)
-{
+void ResizeCamera(const RenderWindow & window, View & view) {
 	float aspectRatio = float(window.getSize().x) / float(window.getSize().y);
 
 	//set size
 	view.setSize(CAMERA_HEIGHT * aspectRatio, CAMERA_HEIGHT);
 }
 
-int main()
-{
+int main() {
 	Clock clock;
 
 	RenderWindow window(VideoMode(960, 672), "Sonic The Hedgehog in C++, By John Lutz", Style::Close | Style::Titlebar);
 	window.setFramerateLimit(60);
 
 	// View ( CAMERA FOCUS x,y ) and CAMERA ZOOM, bigger the number the farther out
-	View view(Vector2f(0.0f, 0.0f), Vector2f(CAMERA_HEIGHT, CAMERA_HEIGHT*0.7));
+	View view(Vector2f(0.0f, 0.0f), Vector2f(CAMERA_HEIGHT, CAMERA_HEIGHT * 0.7));
 
 	Texture backgroundTexture;
 	backgroundTexture.loadFromFile("assets/background.png");
@@ -39,13 +43,12 @@ int main()
 
 	//Load and set icon for the game
 	Image icon;
-	icon.loadFromFile("assets/sonicIcon.png"); 
+	icon.loadFromFile("assets/sonicIcon.png");
 	Vector2u iconSize = icon.getSize();
 	window.setIcon(iconSize.x, iconSize.y, icon.getPixelsPtr());
 	Font hud;
 
-	if (!hud.loadFromFile("hud-font.ttf"))
-	{
+	if (!hud.loadFromFile("hud-font.ttf")) {
 		std::cout << "Error loading file" << std::endl;
 		system("pause");
 	}
@@ -74,7 +77,7 @@ int main()
 	Texture wallTexture;
 	wallTexture.loadFromFile("assets/WallSprite.png");
 	//set Ground floor
-	vector<Ground> groundTiles;
+	vector < Ground > groundTiles;
 	groundTiles.push_back(Ground(&groundTexture, Vector2f(1024.0f, 84.0f), Vector2f(512.0f, 768.0f))); //ground
 	groundTiles.push_back(Ground(&groundTexture, Vector2f(1024.0f, 84.0f), Vector2f(1536.0f, 768.0f))); //ground
 	groundTiles.push_back(Ground(&groundTexture, Vector2f(1024.0f, 84.0f), Vector2f(2536.0f, 768.0f))); //ground
@@ -88,16 +91,22 @@ int main()
 	groundTiles.push_back(Ground(&gameOverSpr, Vector2f(1024.0f, 728.0f), Vector2f(-100, -402))); //gamer over ui
 	groundTiles.push_back(Ground(&gameWonSpr, Vector2f(1024.0f, 728.0f), Vector2f(-1000, -3820))); //gamer won ui
 
-	//Set enemies up TESTING!!!!!!!!!!!!!!!!
+																									 //Set enemies up TESTING!!!!!!!!!!!!!!!!
 	Texture enemyTexture;
 	enemyTexture.loadFromFile("assets/enemySpr.png");
-	vector<Enemy*> enemyVector;
-	Enemy enemy1(Enemy(&enemyTexture, Vector2f(123.0f, 90.0f),Vector2u(3, 1), 0.3f, 40.0f));
-	Enemy enemy2(Enemy(&enemyTexture, Vector2f(123.0f, 90.0f),Vector2u(3, 1), 0.3f, 40.0f));
+	vector < Enemy * > enemyVector;
+	Enemy enemy1(Enemy(&enemyTexture, Vector2f(123.0f, 90.0f), Vector2u(3, 1), 0.3f, 40.0f));
+	Enemy enemy2(Enemy(&enemyTexture, Vector2f(123.0f, 90.0f), Vector2u(3, 1), 0.3f, 40.0f));
 	//^^Enemy(Texture* texture, Vector2f size, Vector2u imageCount, float switchTime, float speed)
-	enemy1.setPos({ 800, 685 });
-	enemy2.setPos({ 300, 685 });
-	
+	enemy1.setPos({
+		800,
+		685
+	});
+	enemy2.setPos({
+		300,
+		685
+	});
+
 	enemyVector.push_back(&enemy1);
 	enemyVector.push_back(&enemy2);
 	// END TEST!!!!!!!!!!!!
@@ -106,7 +115,7 @@ int main()
 	Texture ringTexture;
 	ringTexture.loadFromFile("assets/sprCoin.png");
 
-	vector<Coin*> ringsVector;
+	vector < Coin * > ringsVector;
 	Coin coin1(Coin(&ringTexture, Vector2f(50.0f, 50.0f)));
 	Coin coin2(Coin(&ringTexture, Vector2f(50.0f, 50.0f)));
 	Coin coin3(Coin(&ringTexture, Vector2f(50.0f, 50.0f)));
@@ -115,14 +124,38 @@ int main()
 	Coin coin6(Coin(&ringTexture, Vector2f(50.0f, 50.0f)));
 	Coin coin7(Coin(&ringTexture, Vector2f(50.0f, 50.0f)));
 	Coin coin8(Coin(&ringTexture, Vector2f(50.0f, 50.0f)));
-	coin1.setPos({ 600, 600 });
-	coin2.setPos({ 500, 600 });
-	coin3.setPos({ 700, 600 });
-	coin4.setPos({ 800, 600 });
-	coin5.setPos({ 1200, 600 });
-	coin6.setPos({ 1300, 600 });
-	coin7.setPos({ 1850, 600 });
-	coin8.setPos({ 1950, 600 });
+	coin1.setPos({
+		600,
+		600
+	});
+	coin2.setPos({
+		500,
+		600
+	});
+	coin3.setPos({
+		700,
+		600
+	});
+	coin4.setPos({
+		800,
+		600
+	});
+	coin5.setPos({
+		1200,
+		600
+	});
+	coin6.setPos({
+		1300,
+		600
+	});
+	coin7.setPos({
+		1850,
+		600
+	});
+	coin8.setPos({
+		1950,
+		600
+	});
 	ringsVector.push_back(&coin1);
 	ringsVector.push_back(&coin2);
 	ringsVector.push_back(&coin3);
@@ -171,22 +204,20 @@ int main()
 	Vector2u EnemytextureSize = enemyTexture.getSize();
 	EnemytextureSize.x /= 3;
 	EnemytextureSize.y /= 4;
-	
+
 	Vector2u textureSize = playerTexture.getSize();
 	textureSize.x /= 3;
 	textureSize.y /= 4;
 
-	while (window.isOpen())
-	{
+	while (window.isOpen()) {
 		Event event;
 
 		deltaTime = clock.restart().asSeconds();
 		if (deltaTime > 1.0f / 20.0f)
 			deltaTime = 1.0f / 20.0f; //if you run at 10 fps it'll go at 20fps
-		//this is to stop glitching of a movement bug when you fling the window around
+										//this is to stop glitching of a movement bug when you fling the window around
 
-		while (window.pollEvent(event))
-		{
+		while (window.pollEvent(event)) {
 			//if window closed below
 			if (event.type == Event::Closed)
 				window.close();
@@ -197,23 +228,22 @@ int main()
 		player.Update(deltaTime);
 		Vector2f direction; //direction into player on collision func
 
-		for (Ground& ground : groundTiles)
-		{
-			if (ground.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
-			{
+		for (Ground & ground : groundTiles) {
+			if (ground.GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f)) {
 				player.OnCollision(direction);
 			}
 		}
 		//make sure floor is after player update or it will give game JITTERS (FRIZZY)
-		
+
 		//gonna detect collisions for each coin (must do with each addition)
-		for (Coin* rings : ringsVector)
-		{
-			if (rings->GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f))
-			{
+		for (Coin * rings : ringsVector) {
+			if (rings -> GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f)) {
 				player.OnCollision(direction);
 				RingCount = RingCount + 1;
-				rings->setPos({ 1000, 4002 }); //throws coin away
+				rings -> setPos({
+					1000,
+					4002
+				}); //throws coin away
 			}
 			//updates coin count baby
 			ssRing.str("");
@@ -221,31 +251,33 @@ int main()
 			ringsAmount.setString(ssRing.str());
 		}
 
-		for (Enemy* enemies : enemyVector)
-		{
+		for (Enemy * enemies : enemyVector) {
 			//update enemies once per frame
-			enemies->Update(deltaTime);
+			enemies -> Update(deltaTime);
 
-			for (Ground& ground : groundTiles)
-			{
-				if (ground.GetCollider().CheckCollision(enemies->GetCollider(), direction, 1.0f))
-				{
-					enemies->OnCollision(direction);
+			for (Ground& ground : groundTiles) {
+				if (ground.GetCollider().CheckCollision(enemies -> GetCollider(), direction, 1.0f)) {
+					enemies -> OnCollision(direction);
 				}
 			}
 
 			//very similar to the coin section, exception being these ARE enemies, so you should be in jumping motion to kill this SPECIFIC one (based off the original game, that is!)
-			if (enemies->GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f) )
-			{
+			if (enemies -> GetCollider().CheckCollision(player.GetCollider(), direction, 1.0f)) {
 				if (player.canJump == false) {
 					player.OnCollision(direction);
 					score = score + 100;
-					enemies->setPos({ 1000, 4002 }); //throws enemy away
+					enemies -> setPos({
+						1000,
+						4002
+					}); //throws enemy away
 				}
 				else {
 					player.OnCollision(direction);
 					score = 0;
-					player.setPos({ 0, 685 });
+					player.setPos({
+						0,
+						685
+					});
 					lives = lives - 1;
 				}
 			}
@@ -261,9 +293,8 @@ int main()
 		}
 
 		//time increment IMPLEMENTATION BELOW, NO TOUCH
-		if (increSecs <= 60)
-		{
-			increSecs++;	
+		if (increSecs <= 60) {
+			increSecs++;
 		}
 		if (increSecs == 60) {
 			secs = secs + 1;
@@ -279,12 +310,14 @@ int main()
 		//NO TOUCH ABOVE
 
 		//make gameover screen
-		if (RingCount == 8)
-		{
-			player.setPos({ -1000, -3820 });
+		if (RingCount == 8) {
+			player.setPos({
+				-1000,
+				-3820
+			});
 
 		}
-	
+
 		std::ostringstream ssTime;
 		ssTime << "TIME: " << timer;
 		Text time;
@@ -293,31 +326,30 @@ int main()
 		time.setString(ssTime.str());
 		time.setPosition(-125.0f, 650.0f);
 		//GAMEOVER BELOW, FINALLY
-		if (lives <= 0)
-		{
+		if (lives <= 0) {
 			player.gameOver = 1;
-			player.setPos({ -100, -382 }); //throws player away
+			player.setPos({
+				-100,
+				-382
+			}); //throws player away
 		}
 		//GAMEOVER ABOVE
 
 		window.clear();
-		
+
 		//set view with window
 		window.setView(view);
 
 		//must be after player updates ex: OBJECT_NAME.Update(deltaTime);
 		view.setCenter(player.GetterPos());
 		window.draw(background);
-		for (Enemy* enemies : enemyVector)
-		{
-			enemies->Draw(window);
+		for (Enemy* enemies : enemyVector) {
+			enemies -> Draw(window);
 		}
-		for (Coin* rings : ringsVector)
-		{
-			rings->Draw(window);
+		for (Coin* rings : ringsVector) {
+			rings -> Draw(window);
 		}
-		for (Ground& ground : groundTiles)
-		{
+		for (Ground& ground : groundTiles) {
 			ground.Draw(window);
 		}
 		player.Draw(window);
